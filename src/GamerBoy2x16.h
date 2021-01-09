@@ -10,9 +10,9 @@ class GamerBoy2x16 {
   public:
     GamerBoy2x16(void);
     void initialize(void);
-	void update(void);
-	
-	Controller controller;
+  void update(void);
+  
+  Controller controller;
 };
 
 #endif
