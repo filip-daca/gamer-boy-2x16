@@ -41,15 +41,15 @@ void Controller::updateJoystick(void) {
   word readValueY = analogRead(PIN_AXIS_Y);
   
   if (readValueX >= centerX) {
-    x = MAX_READ - map(readValueX, CENTER, MAX_READ, centerX, MAX_READ);
+    x = MAX_READ - map(readValueX, centerX, MAX_READ, CENTER, MAX_READ);
   } else {
-    x = MAX_READ - map(readValueX, 0, CENTER, 0, centerX);
+    x = MAX_READ - map(readValueX, 0, centerX, 0, CENTER);
   }
   
   if (readValueY >= centerY) {
-    y = map(readValueY, CENTER, MAX_READ, centerY, MAX_READ);
+    y = map(readValueY, centerY, MAX_READ, CENTER, MAX_READ);
   } else {
-    y = map(readValueY, 0, CENTER, 0, centerY);
+    y = map(readValueY, 0, centerY, 0, CENTER);
   }
   
   left = x < CENTER - THRESHOLD_JOY;
