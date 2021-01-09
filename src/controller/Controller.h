@@ -26,8 +26,6 @@ class Controller {
 		word y;
 		bool a;
 		bool b;
-    word centerX;
-    word centerY;
     
     bool left;
     bool right;
@@ -39,7 +37,8 @@ class Controller {
 		void calibrateJoystick(void);
 	
 	private:
-    
+    word centerX;
+    word centerY;
   
 		void updateButtons(void);
 		void updateJoystick(void);
