@@ -7,6 +7,7 @@
 
 GamerBoy2x16::GamerBoy2x16(void) {
   controller = Controller();
+  display = Display();
 };
 
 // ----------------------------------------------------------------------------
@@ -14,8 +15,10 @@ GamerBoy2x16::GamerBoy2x16(void) {
 
 void GamerBoy2x16::initialize(void) {
   controller.initialize();
+  display.initialize();
 };
 
 void GamerBoy2x16::update(void) {
   controller.update();
+  display.update();
 };

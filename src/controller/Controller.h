@@ -6,6 +6,8 @@
 #define MAX_READ      1024
 #define CENTER        512
 
+#define DEBUG 0
+
 
 static const word BUTTON_A          = 768;
 static const word BUTTON_B          = 512;

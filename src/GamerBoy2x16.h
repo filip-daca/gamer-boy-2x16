@@ -4,15 +4,18 @@
 #include "Arduino.h"
 
 #include "controller/Controller.h"
+#include "display/Display.h"
 
+#define DEBUG 0
 
 class GamerBoy2x16 {
   public:
     GamerBoy2x16(void);
     void initialize(void);
-  void update(void);
+    void update(void);
   
-  Controller controller;
+    Controller controller;
+    Display display;
 };
 
 #endif
