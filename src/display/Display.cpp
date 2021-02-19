@@ -63,6 +63,29 @@ void Display::write(const char* message) {
   lcd.write(message);
 }
 
+void Display::drawCurrentFrame(BitmapAnimation& bitmapAnimation) {
+  byte** sprites = bitmapAnimation.getSpritesFromFrame();
+  
+  // DEBUG
+  /*
+  for (byte y = 0; y < 8; ++y) {
+    Serial.println(sprites[2][y], BIN);
+  }
+  Serial.println();
+  */
+  
+  for (byte y = 0; y < ROWS; ++y) {
+    for (byte x = 0; x < 4; ++x) {
+      draw(sprites[y*4 + x], bitmapAnimation.getScreenPosition() + x, y);
+    }
+  }
+  
+  for (byte i = 0; i < 8; ++i) {
+    delete[] sprites[i];
+  }
+  delete[] sprites;
+}
+
 // ----------------------------------------------------------------------------
 // Private
 

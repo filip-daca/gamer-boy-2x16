@@ -3,6 +3,7 @@
 
 #include "Arduino.h"
 #include "LiquidCrystal.h"
+#include "BitmapAnimation.h"
 
 #define MAX_SPRITES   8
 #define SPRITE_LEN    8
@@ -30,6 +31,7 @@ class Display {
     void flush();
     void setCursor(byte col, byte row);
     void write(const char* message);
+    void drawCurrentFrame(BitmapAnimation& bitmapAnimation);
     
   private:
     LiquidCrystal lcd;
