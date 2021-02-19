@@ -86,6 +86,10 @@ void Display::drawCurrentFrame(BitmapAnimation& bitmapAnimation) {
   delete[] sprites;
 }
 
+void Display::drawBitmap(word bitmap[], byte col) {
+  
+}
+
 // ----------------------------------------------------------------------------
 // Private
 

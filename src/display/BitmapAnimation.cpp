@@ -26,42 +26,9 @@ byte** BitmapAnimation::getSpritesFromFrame() {
     }
   }
   
-  // DEBUG
-  /*
-  Serial.println("All frames: " + String(framesCount));
-  Serial.println("This frame: " + String(currentFrame));
-  for (word x = 0; x < 20; ++x) {
-    Serial.print(String(frames[currentFrame][x]));
-    Serial.print(' ');
-  }
-  Serial.println();
-  */
-  
-  // DEBUG
-  /*
-  for (byte y = 0; y < 8; ++y) {
-    for (byte x = 10; x < 15; ++x) {
-      if (bitmap[y][x] == 1) {
-        Serial.print('#');
-      } else {
-        Serial.print(' ');
-      }
-    }
-    Serial.println();
-  }
-  */
-  
   for (byte i = 0; i < 8; ++i) {
     memset(sprites[i], 0, 8);
   }
-  
-  // DEBUG
-  /*
-  for (byte y = 0; y < 8; ++y) {
-    Serial.println(sprites[2][y], BIN);
-  }
-  Serial.println();
-  */
   
   for (byte y = 0; y < 8; ++y) {
     byte line = 0;
@@ -79,14 +46,6 @@ byte** BitmapAnimation::getSpritesFromFrame() {
     }
   }
   
-  // DEBUG
-  /*
-  for (byte y = 0; y < 8; ++y) {
-    Serial.println(sprites[2][y], BIN);
-  }
-  Serial.println();
-  */
-  
   spritesPointer = new byte*[8];
   for (byte i = 0; i < 8; ++i) {
     spritesPointer[i] = new byte[8];
@@ -94,13 +53,6 @@ byte** BitmapAnimation::getSpritesFromFrame() {
       spritesPointer[i][x] = sprites[i][x];
     }
   }
-  
-  /*
-  for (byte y = 0; y < 8; ++y) {
-    Serial.println(spritesPointer[2][y], BIN);
-  }
-  Serial.println();
-  */
   
   return spritesPointer;
 };

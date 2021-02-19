@@ -21,7 +21,6 @@ word* framesPointer[20];
 BitmapAnimation animation = BitmapAnimation(framesPointer, 10, 6);
 
 void setup() {
-  Serial.begin(9600);
   gb.initialize();
 
   for (size_t i = 0; i < 10; ++i) {
