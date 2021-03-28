@@ -4,7 +4,7 @@
 
 GamerBoy2x16 gb = GamerBoy2x16();
 
-byte sprites[13][8] = {
+byte glyphs[13][GLYPH_MAX_Y] = {
   { 0x00, 0x00, 0x0A, 0x00, 0x11, 0x0E, 0x00, 0x00 },
   { 0x00, 0x00, 0x0A, 0x00, 0x00, 0x0E, 0x11, 0x00 },
   { 0x00, 0x00, 0x0A, 0x00, 0x00, 0x0E, 0x00, 0x00 },
@@ -29,23 +29,23 @@ void loop() {
   gb.display.clear();
 
   gb.display.setCursor(0, 0);
-  gb.display.write("Dynamic sprites");
+  gb.display.write("Dynamic glyphs");
 
-  drawRandomSprite(1, 1);
-  drawRandomSprite(3, 1);
-  drawRandomSprite(5, 1);
-  drawRandomSprite(7, 1);
-  drawRandomSprite(9, 1);
-  drawRandomSprite(11, 1);
-  drawRandomSprite(13, 1);
-  drawRandomSprite(15, 1);
+  drawRandomGlyph(1, 1);
+  drawRandomGlyph(3, 1);
+  drawRandomGlyph(5, 1);
+  drawRandomGlyph(7, 1);
+  drawRandomGlyph(9, 1);
+  drawRandomGlyph(11, 1);
+  drawRandomGlyph(13, 1);
+  drawRandomGlyph(15, 1);
 
   gb.display.flush();
   
   delay(DELAY);
 }
 
-void drawRandomSprite(byte x, byte y) {
-  byte spriteIndex = random(0, 13);
-  gb.display.draw(sprites[spriteIndex], x, y);
+void drawRandomGlyph(byte x, byte y) {
+  byte glyphIndex = random(0, 13);
+  gb.display.draw(glyphs[glyphIndex], x, y);
 }

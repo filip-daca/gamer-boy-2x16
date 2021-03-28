@@ -14,10 +14,10 @@ BitmapAnimation::BitmapAnimation(word** frames, word framesCount,
 // ----------------------------------------------------------------------------
 // Public
 
-byte** BitmapAnimation::getSpritesFromFrame() {
-  byte sprites[8][8];
+byte** BitmapAnimation::getGlyphsFromFrame() {
+  byte glyphs[8][8];
   byte bitmap[BITMAP_MAX_Y][BITMAP_MAX_X];
-  byte** spritesPointer;
+  byte** glyphsPointer;
   
   word* frame = frames[currentFrame];
   for (byte x = 0; x < BITMAP_MAX_X; ++x) {
@@ -27,14 +27,14 @@ byte** BitmapAnimation::getSpritesFromFrame() {
   }
   
   for (byte i = 0; i < 8; ++i) {
-    memset(sprites[i], 0, 8);
+    memset(glyphs[i], 0, 8);
   }
   
   for (byte y = 0; y < 8; ++y) {
     byte line = 0;
     for (byte x = 0; x < BITMAP_MAX_X; ++x) {
       byte i = x / 5;
-      sprites[i][y] = sprites[i][y] | (bitmap[y][x] << (4 - (x % 5)));
+      glyphs[i][y] = glyphs[i][y] | (bitmap[y][x] << (4 - (x % 5)));
     }
   }
   
@@ -42,19 +42,19 @@ byte** BitmapAnimation::getSpritesFromFrame() {
     byte line = 0;
     for (byte x = 0; x < BITMAP_MAX_X; ++x) {
       byte i = x / 5;
-      sprites[i + 4][y - 8] = sprites[i + 4][y - 8] | (bitmap[y][x] << (4 - (x % 5)));
+      glyphs[i + 4][y - 8] = glyphs[i + 4][y - 8] | (bitmap[y][x] << (4 - (x % 5)));
     }
   }
   
-  spritesPointer = new byte*[8];
+  glyphsPointer = new byte*[8];
   for (byte i = 0; i < 8; ++i) {
-    spritesPointer[i] = new byte[8];
+    glyphsPointer[i] = new byte[8];
     for (byte x = 0; x < 8; ++x) {
-      spritesPointer[i][x] = sprites[i][x];
+      glyphsPointer[i][x] = glyphs[i][x];
     }
   }
   
-  return spritesPointer;
+  return glyphsPointer;
 };
 
 void BitmapAnimation::nextFrame() {

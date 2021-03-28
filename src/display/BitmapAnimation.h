@@ -12,7 +12,7 @@
 class BitmapAnimation {
   public:
     BitmapAnimation(word** frames, word framesCount, byte screenPosition);
-    byte** getSpritesFromFrame();
+    byte** getGlyphsFromFrame();
     void nextFrame();
     byte getScreenPosition();
     

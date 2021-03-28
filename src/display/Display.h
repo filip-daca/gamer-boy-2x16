@@ -6,10 +6,11 @@
 #include "BitmapAnimation.h"
 #include "Sprite.h"
 
-#define MAX_SPRITES   8
-#define SPRITE_LEN    8
+
 #define COLS          16
 #define ROWS          2
+
+#define MAX_GLYPHS    8
 #define GLYPH_MAX_X   5
 #define GLYPH_MAX_Y   8
 
@@ -30,7 +31,7 @@ class Display {
     void initialize();
     void update();
     void clear();
-    void draw(byte sprite[], byte col, byte row);
+    void draw(byte glyph[], byte col, byte row);
     void flush();
     void setCursor(byte col, byte row);
     void write(const char* message);
@@ -40,13 +41,13 @@ class Display {
     
   private:
     LiquidCrystal lcd;
-    byte screen[ROWS][COLS][SPRITE_LEN];
-    byte customSprites[MAX_SPRITES][SPRITE_LEN];
-    bool spriteUsed[MAX_SPRITES];
+    byte screen[ROWS][COLS][GLYPH_MAX_Y];
+    byte customGlyphs[MAX_GLYPHS][GLYPH_MAX_Y];
+    bool glyphUsed[MAX_GLYPHS];
     bool fieldActive[ROWS][COLS];
     
-    byte findOrCreateSprite(byte sprite[]);
-    byte getUsedSpriteCount();
+    byte findOrCreateGlyph(byte glyph[]);
+    byte getUsedGlyphCount();
 };
 
 #endif

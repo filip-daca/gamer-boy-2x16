@@ -13,8 +13,8 @@ void Display::initialize() {
   lcd.begin(COLS, ROWS);
   
   clear();
-  for (byte i = 0; i < MAX_SPRITES; ++i) {
-    memset(customSprites[i], B00000, SPRITE_LEN);
+  for (byte i = 0; i < MAX_GLYPHS; ++i) {
+    memset(customGlyphs[i], B00000, GLYPH_MAX_Y);
   }
 };
 
@@ -24,17 +24,17 @@ void Display::update() {
 void Display::clear() {
   for (byte row = 0; row < ROWS; ++row) {
     for (byte col = 0; col < COLS; ++col) {
-       memset(screen[row][col], B00000, SPRITE_LEN);
+       memset(screen[row][col], B00000, GLYPH_MAX_Y);
        fieldActive[row][col] = false;
     }
   }
-  memset(spriteUsed, false, MAX_SPRITES);
+  memset(glyphUsed, false, MAX_GLYPHS);
   lcd.clear();
 }
 
-void Display::draw(byte sprite[], byte col, byte row) {
-  for (byte i = 0; i < SPRITE_LEN; ++i) {
-    screen[row][col][i] = (screen[row][col][i] | sprite[i]);
+void Display::draw(byte glyph[], byte col, byte row) {
+  for (byte i = 0; i < GLYPH_MAX_Y; ++i) {
+    screen[row][col][i] = (screen[row][col][i] | glyph[i]);
   }
   fieldActive[row][col] = true;
 }
@@ -43,15 +43,15 @@ void Display::flush() {
   for (byte row = 0; row < ROWS; ++row) {
     for (byte col = 0; col < COLS; ++col) {
       if (fieldActive[row][col]) {
-        byte spriteNumber = findOrCreateSprite(screen[row][col]);
+        byte glyphNumber = findOrCreateGlyph(screen[row][col]);
         lcd.setCursor(col, row);
-        lcd.write(spriteNumber);
+        lcd.write(glyphNumber);
       }
     }
   }
 
   if (DEBUG) {
-    Serial.println("SPR: " + String(getUsedSpriteCount()));
+    Serial.println("SPR: " + String(getUsedGlyphCount()));
   }
 }
 
@@ -64,18 +64,18 @@ void Display::write(const char* message) {
 }
 
 void Display::drawCurrentFrame(BitmapAnimation& bitmapAnimation) {
-  byte** sprites = bitmapAnimation.getSpritesFromFrame();
+  byte** glyphs = bitmapAnimation.getGlyphsFromFrame();
   
   for (byte row = 0; row < ROWS; ++row) {
     for (byte col = 0; col < 4; ++col) {
-      draw(sprites[row*4 + col], bitmapAnimation.getScreenPosition() + col, row);
+      draw(glyphs[row*4 + col], bitmapAnimation.getScreenPosition() + col, row);
     }
   }
   
   for (byte i = 0; i < 8; ++i) {
-    delete[] sprites[i];
+    delete[] glyphs[i];
   }
-  delete[] sprites;
+  delete[] glyphs;
 }
 
 void Display::drawBitmap(word bitmap[], byte col) {
@@ -83,7 +83,7 @@ void Display::drawBitmap(word bitmap[], byte col) {
 }
 
 void Display::drawSprite(Sprite& sprite, byte x, byte y) {
-  byte glyphs[4][SPRITE_LEN];
+  byte glyphs[4][GLYPH_MAX_Y];
 
   byte col = x / GLYPH_MAX_X;
   byte row = y / GLYPH_MAX_Y;
@@ -99,29 +99,29 @@ void Display::drawSprite(Sprite& sprite, byte x, byte y) {
 // ----------------------------------------------------------------------------
 // Private
 
-byte Display::findOrCreateSprite(byte sprite[]) {
-  for (byte i = 0; i < MAX_SPRITES; ++i) {
-    if (spriteUsed[i] && memcmp(sprite, customSprites[i], SPRITE_LEN) == 0) {
+byte Display::findOrCreateGlyph(byte glyph[]) {
+  for (byte i = 0; i < MAX_GLYPHS; ++i) {
+    if (glyphUsed[i] && memcmp(glyph, customGlyphs[i], GLYPH_MAX_Y) == 0) {
       return i;
     }
   }
   
   byte i = 0;
-  while (spriteUsed[i] && i < MAX_SPRITES) {
+  while (glyphUsed[i] && i < MAX_GLYPHS) {
     i++;
   }
 
-  spriteUsed[i] = true;
-  memcpy(customSprites[i], sprite, SPRITE_LEN);
-  lcd.createChar(i, sprite);
+  glyphUsed[i] = true;
+  memcpy(customGlyphs[i], glyph, GLYPH_MAX_Y);
+  lcd.createChar(i, glyph);
 
   return i;
 }
 
-byte Display::getUsedSpriteCount() {
+byte Display::getUsedGlyphCount() {
   byte count = 0;
-  for (byte i = 0; i < MAX_SPRITES; ++i) {
-    if (spriteUsed[i]) {
+  for (byte i = 0; i < MAX_GLYPHS; ++i) {
+    if (glyphUsed[i]) {
       count++;
     }
   }
