@@ -16,12 +16,12 @@ BitmapAnimation::BitmapAnimation(word** frames, word framesCount,
 
 byte** BitmapAnimation::getSpritesFromFrame() {
   byte sprites[8][8];
-  byte bitmap[16][20];
+  byte bitmap[MAX_Y][MAX_X];
   byte** spritesPointer;
   
   word* frame = frames[currentFrame];
-  for (byte x = 0; x < 20; ++x) {
-    for (byte y = 0; y < 16; ++y) {
+  for (byte x = 0; x < MAX_X; ++x) {
+    for (byte y = 0; y < MAX_Y; ++y) {
       bitmap[y][x] = (frame[x] >> y) & 1;
     }
   }
@@ -32,15 +32,15 @@ byte** BitmapAnimation::getSpritesFromFrame() {
   
   for (byte y = 0; y < 8; ++y) {
     byte line = 0;
-    for (byte x = 0; x < 20; ++x) {
+    for (byte x = 0; x < MAX_X; ++x) {
       byte i = x / 5;
       sprites[i][y] = sprites[i][y] | (bitmap[y][x] << (4 - (x % 5)));
     }
   }
   
-  for (byte y = 8; y < 16; ++y) {
+  for (byte y = 8; y < MAX_Y; ++y) {
     byte line = 0;
-    for (byte x = 0; x < 20; ++x) {
+    for (byte x = 0; x < MAX_X; ++x) {
       byte i = x / 5;
       sprites[i + 4][y - 8] = sprites[i + 4][y - 8] | (bitmap[y][x] << (4 - (x % 5)));
     }

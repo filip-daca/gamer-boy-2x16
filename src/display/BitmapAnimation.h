@@ -3,6 +3,9 @@
 
 #include "Arduino.h"
 
+#define MAX_X 20
+#define MAX_Y 16
+
 #define DEBUG 0
 
 

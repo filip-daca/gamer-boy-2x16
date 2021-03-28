@@ -32,6 +32,7 @@ class Display {
     void setCursor(byte col, byte row);
     void write(const char* message);
     void drawCurrentFrame(BitmapAnimation& bitmapAnimation);
+    void drawBitmap(word bitmap[], byte col);
     
   private:
     LiquidCrystal lcd;

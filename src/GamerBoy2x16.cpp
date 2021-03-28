@@ -1,6 +1,4 @@
 #include "GamerBoy2x16.h"
-#include "controller/Controller.h"
-
 
 // ----------------------------------------------------------------------------
 // Constructor
