@@ -23,7 +23,7 @@ BitmapAnimation animation = BitmapAnimation(framesPointer, 10, 6);
 void setup() {
   gb.initialize();
 
-  for (size_t i = 0; i < 10; ++i) {
+  for (byte i = 0; i < 10; ++i) {
     framesPointer[i] = frames_cow[i];
   }
 }
