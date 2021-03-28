@@ -27,7 +27,7 @@ class Display {
     void initialize();
     void update();
     void clear();
-    void draw(byte sprite[], byte x, byte y);
+    void draw(byte sprite[], byte col, byte row);
     void flush();
     void setCursor(byte col, byte row);
     void write(const char* message);

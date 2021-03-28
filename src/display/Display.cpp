@@ -22,29 +22,29 @@ void Display::update() {
 };
 
 void Display::clear() {
-  for (byte y = 0; y < ROWS; ++y) {
-    for (byte x = 0; x < COLS; ++x) {
-       memset(screen[y][x], B00000, SPRITE_LEN);
-       fieldActive[y][x] = false;
+  for (byte row = 0; row < ROWS; ++row) {
+    for (byte col = 0; col < COLS; ++col) {
+       memset(screen[row][col], B00000, SPRITE_LEN);
+       fieldActive[row][col] = false;
     }
   }
   memset(spriteUsed, false, MAX_SPRITES);
   lcd.clear();
 }
 
-void Display::draw(byte sprite[], byte x, byte y) {
+void Display::draw(byte sprite[], byte col, byte row) {
   for (byte i = 0; i < SPRITE_LEN; ++i) {
-    screen[y][x][i] = (screen[y][x][i] | sprite[i]);
+    screen[row][col][i] = (screen[row][col][i] | sprite[i]);
   }
-  fieldActive[y][x] = true;
+  fieldActive[row][col] = true;
 }
 
 void Display::flush() {
-  for (byte y = 0; y < ROWS; ++y) {
-    for (byte x = 0; x < COLS; ++x) {
-      if (fieldActive[y][x]) {
-        byte spriteNumber = findOrCreateSprite(screen[y][x]);
-        lcd.setCursor(x, y);
+  for (byte row = 0; row < ROWS; ++row) {
+    for (byte col = 0; col < COLS; ++col) {
+      if (fieldActive[row][col]) {
+        byte spriteNumber = findOrCreateSprite(screen[row][col]);
+        lcd.setCursor(col, row);
         lcd.write(spriteNumber);
       }
     }
@@ -66,9 +66,9 @@ void Display::write(const char* message) {
 void Display::drawCurrentFrame(BitmapAnimation& bitmapAnimation) {
   byte** sprites = bitmapAnimation.getSpritesFromFrame();
   
-  for (byte y = 0; y < ROWS; ++y) {
-    for (byte x = 0; x < 4; ++x) {
-      draw(sprites[y*4 + x], bitmapAnimation.getScreenPosition() + x, y);
+  for (byte row = 0; row < ROWS; ++row) {
+    for (byte col = 0; col < 4; ++col) {
+      draw(sprites[row*4 + col], bitmapAnimation.getScreenPosition() + col, row);
     }
   }
   
