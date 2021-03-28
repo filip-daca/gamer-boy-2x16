@@ -82,6 +82,20 @@ void Display::drawBitmap(word bitmap[], byte col) {
   
 }
 
+void Display::drawSprite(Sprite& sprite, byte x, byte y) {
+  byte glyphs[4][SPRITE_LEN];
+
+  byte col = x / GLYPH_MAX_X;
+  byte row = y / GLYPH_MAX_Y;
+
+  // TODO: fill 4 glyphs using sprite
+  
+  draw(glyphs[0], col, row);
+  draw(glyphs[1], col + 1, row);
+  draw(glyphs[2], col, row + 1);
+  draw(glyphs[3], col + 1, row + 1);
+}
+
 // ----------------------------------------------------------------------------
 // Private
 

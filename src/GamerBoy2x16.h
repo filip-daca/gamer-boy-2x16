@@ -5,7 +5,6 @@
 
 #include "controller/Controller.h"
 #include "display/Display.h"
-#include "display/BitmapAnimation.h"
 
 #define DEBUG 0
 

@@ -4,11 +4,14 @@
 #include "Arduino.h"
 #include "LiquidCrystal.h"
 #include "BitmapAnimation.h"
+#include "Sprite.h"
 
 #define MAX_SPRITES   8
 #define SPRITE_LEN    8
 #define COLS          16
 #define ROWS          2
+#define GLYPH_MAX_X   5
+#define GLYPH_MAX_Y   8
 
 #define DEBUG 0
 
@@ -33,6 +36,7 @@ class Display {
     void write(const char* message);
     void drawCurrentFrame(BitmapAnimation& bitmapAnimation);
     void drawBitmap(word bitmap[], byte col);
+    void drawSprite(Sprite& sprite, byte x, byte y);
     
   private:
     LiquidCrystal lcd;
