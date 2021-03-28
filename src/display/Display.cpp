@@ -88,7 +88,12 @@ void Display::drawSprite(Sprite& sprite, byte x, byte y) {
   byte col = x / GLYPH_MAX_X;
   byte row = y / GLYPH_MAX_Y;
 
-  // TODO: fill 4 glyphs using sprite
+  for (byte i = 0; i < GLYPH_MAX_Y; ++i) {
+    glyphs[0][i] = sprite.rows[i - (y % GLYPH_MAX_Y)] >> (x % GLYPH_MAX_X);
+    glyphs[2][i] = sprite.rows[i + (GLYPH_MAX_Y - (y % GLYPH_MAX_Y))] >> (x % GLYPH_MAX_X);
+    glyphs[1][i] = sprite.rows[i - (y % GLYPH_MAX_Y)] << (GLYPH_MAX_X - (x % GLYPH_MAX_X));
+    glyphs[3][i] = sprite.rows[i + (GLYPH_MAX_Y - (y % GLYPH_MAX_Y))] << (GLYPH_MAX_X - (x % GLYPH_MAX_X));
+  }
   
   draw(glyphs[0], col, row);
   draw(glyphs[1], col + 1, row);

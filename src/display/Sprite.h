@@ -6,8 +6,6 @@
 class Sprite {
   public:
     Sprite(byte* rows);
-
-  private:
     byte* rows;
 };
 

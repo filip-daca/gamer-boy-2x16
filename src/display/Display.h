@@ -6,7 +6,8 @@
 #include "BitmapAnimation.h"
 #include "Sprite.h"
 
-
+#define MAX_X         5*16
+#define MAX_Y         8*2
 #define COLS          16
 #define ROWS          2
 
