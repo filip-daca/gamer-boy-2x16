@@ -3,8 +3,8 @@
 
 #include "Arduino.h"
 
-#define MAX_X 20
-#define MAX_Y 16
+#define BITMAP_MAX_X 20
+#define BITMAP_MAX_Y 16
 
 #define DEBUG 0
 
