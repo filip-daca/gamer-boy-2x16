@@ -5,6 +5,7 @@
 
 #include "controller/Controller.h"
 #include "display/Display.h"
+#include "sound/Sound.h"
 
 #define DEBUG 0
 
@@ -16,6 +17,7 @@ class GamerBoy2x16 {
   
     Controller controller;
     Display display;
+    Sound sound;
 };
 
 #endif
