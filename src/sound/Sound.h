@@ -2,6 +2,7 @@
 #define Sound_h
 
 #include "Arduino.h"
+#include "Note.h"
 
 #define DEBUG 0
 
