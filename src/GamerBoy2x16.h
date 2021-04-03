@@ -4,6 +4,7 @@
 #include "Arduino.h"
 
 #include "controller/Controller.h"
+#include "data/LimitedStack.h"
 #include "display/Display.h"
 #include "sound/Sound.h"
 
