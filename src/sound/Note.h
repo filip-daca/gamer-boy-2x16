@@ -6,8 +6,8 @@
 class Note {
   public:
     Note(word tone, word length);
-	word tone;
-	word length;
+	  word tone;
+	  word length;
 };
 
 // ----------------------------------------------------------------------------

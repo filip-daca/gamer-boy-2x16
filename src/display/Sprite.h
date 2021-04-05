@@ -9,4 +9,12 @@ class Sprite {
     byte* rows;
 };
 
+// ----------------------------------------------------------------------------
+// Constructor
+
+Sprite::Sprite(byte* rows) {
+  this->rows = rows;
+};
+
+
 #endif
