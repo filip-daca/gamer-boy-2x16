@@ -45,18 +45,12 @@ LimitedStack<T>::~LimitedStack() {
 
 template<typename T>
 T LimitedStack<T>::pop() {
-	if (isEmpty()) {
-		return NULL;
-	}
 	size--;
 	return dataArray[size];
 }
 
 template<typename T>
 T LimitedStack<T>::top() {
-	if (isEmpty()) {
-		return NULL;
-	}
 	return dataArray[size - 1];
 }
 
