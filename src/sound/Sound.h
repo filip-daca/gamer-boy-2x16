@@ -17,10 +17,14 @@ class Sound {
     void update();
 
     void playTone(word note, word length);
+    void playMelody(Note* melody, byte length, bool relativeIntervals);
 
   private:
     bool silent;
     LimitedStack<Note> buffer = LimitedStack<Note>(NOTE_BUFFER_SIZE);
+    byte currentMelodyLength;
+    Note* currentMelody;
+    bool melodyRelativeIntervals;
 };
 
 // ----------------------------------------------------------------------------
@@ -38,9 +42,25 @@ void Sound::initialize() {
     buffer.pop();
   }
   silent = true;
+  currentMelodyLength = 0;
+  currentMelody = NULL;
+  melodyRelativeIntervals = false;
 };
 
 void Sound::update() {
+  if (buffer.isEmpty() && currentMelodyLength > 0) {
+    if (melodyRelativeIntervals) {
+      byte relativeNoteLength = 16 / currentMelody->length;
+      buffer.push(Note(0, relativeNoteLength));
+      buffer.push(Note(currentMelody->tone, relativeNoteLength));
+    } else {
+      buffer.push(*currentMelody);
+    }
+
+    currentMelody++;
+    currentMelodyLength--;
+  }
+
   if (buffer.isEmpty()) {
     if (!silent) {
       noTone(PIN_SOUND);
@@ -61,6 +81,12 @@ void Sound::update() {
 
 void Sound::playTone(word note, word length) {
   buffer.push(Note(note, length));
+};
+
+void Sound::playMelody(Note* melody, byte length, bool relativeIntervals) {
+  currentMelody = melody;
+  currentMelodyLength = length;
+  melodyRelativeIntervals = relativeIntervals;
 };
 
 // ----------------------------------------------------------------------------
